@@ -1,0 +1,50 @@
+{
+  "name": "signal-pulse",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc -b && vite build",
+    "typecheck": "tsc -b",
+    "test": "vitest run",
+    "test:browser": "playwright test",
+    "worker:dev": "wrangler dev",
+    "db:local": "wrangler d1 migrations apply election-atlas --local",
+    "db:remote": "wrangler d1 migrations apply election-atlas --remote",
+    "deploy": "node scripts/preflight.mjs && npm run build && wrangler deploy",
+    "sync": "node --import tsx scripts/pulse-sync.ts",
+    "test:migrations": "python3 scripts/test-migrations.py",
+    "check": "npm run typecheck && npm test",
+    "verify:remote": "node --import tsx scripts/verify-remote.ts",
+    "benchmark": "node --import tsx scripts/benchmark.ts",
+    "collect:local": "node scripts/collect-local.mjs"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^5.90.0",
+    "fast-xml-parser": "^5.3.0",
+    "lucide-react": "^0.468.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-router-dom": "^7.9.0",
+    "recharts": "^3.3.0",
+    "zod": "^4.1.0"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
+    "@cloudflare/workers-types": "latest",
+    "@playwright/test": "^1.56.0",
+    "@tailwindcss/vite": "^4.1.0",
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "@vitejs/plugin-react": "^5.0.0",
+    "prettier": "^3.9.10",
+    "tailwindcss": "^4.1.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.0",
+    "vite": "^7.1.0",
+    "vitest": "^5.1.0",
+    "wrangler": "^4.45.0"
+  }
+}

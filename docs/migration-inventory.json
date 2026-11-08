@@ -1,0 +1,237 @@
+[
+  {
+    "path": "src/main.tsx",
+    "bytes": 67592,
+    "sha256": "f2edeebd1071425fdef60732e1a759216941c0fcb4cfc27a1cdefdf9ddbd027c"
+  },
+  {
+    "path": "src/forecast-page.tsx",
+    "bytes": 34972,
+    "sha256": "6253dcc28c2860189b4585be844a0115000b5823482340bdff2c927b337d7a20"
+  },
+  {
+    "path": "src/map.tsx",
+    "bytes": 9459,
+    "sha256": "ddf184fc83d8e05939bf923c2ac0f45d1dab9507aca146167fa47f655042d1df"
+  },
+  {
+    "path": "src/style.css",
+    "bytes": 36851,
+    "sha256": "69e6a8d97a286c0ad2e99f857412770f9682afb976614491306d3df3fe54aa12"
+  },
+  {
+    "path": "src/race-evidence.tsx",
+    "bytes": 2985,
+    "sha256": "172f13c5cc3e04c56eb814f9f5f409c80cc550cf0780a8ea1a47d5260a82f612"
+  },
+  {
+    "path": "src/poll-chart.tsx",
+    "bytes": 3955,
+    "sha256": "3d475ad6210b90a605a58f32247ab79f53d66a1a9a3270cb040b0194714e3a72"
+  },
+  {
+    "path": "shared/source-policy.ts",
+    "bytes": 1197,
+    "sha256": "e62f37fbc53719523f325f16a224f9e4edbed459bb2b0ec4a6a89b6d0b0ce91d"
+  },
+  {
+    "path": "shared/states.json",
+    "bytes": 18596,
+    "sha256": "4fae1b14b47eeb1c3ca015a83edb46cc8867f1f82611c88e5ada95db5205d9cd"
+  },
+  {
+    "path": "shared/providers.ts",
+    "bytes": 5516,
+    "sha256": "bfc3068e751f7541058296eb5793ae526d7a6ee30a7012f7b95cdac160493e20"
+  },
+  {
+    "path": "shared/schedules-2026.json",
+    "bytes": 2039,
+    "sha256": "8feeb47176c830c4111bb8913ec6ef7f4befcfd044465400211743edf8b02b61"
+  },
+  {
+    "path": "shared/discovery.ts",
+    "bytes": 15621,
+    "sha256": "945c911d25796276d6882f62389d9a4d9daa5ee0a6061884e93a193810294b0c"
+  },
+  {
+    "path": "shared/models.ts",
+    "bytes": 7371,
+    "sha256": "2c1da59688b875c9c8927472c620d74d05dc7036725dca26aae2b4ea1e02366a"
+  },
+  {
+    "path": "shared/forecast.ts",
+    "bytes": 14629,
+    "sha256": "808f19d59c3fa9afcc67651564e96f06d564ccad4a44cfcc2a6c21a83d75ce14"
+  },
+  {
+    "path": "shared/provider-registry.ts",
+    "bytes": 1592,
+    "sha256": "68cec2de3747abbc8bbf683ed8aea4188571bd90f44e7228657ed47157bfadfc"
+  },
+  {
+    "path": "scripts/verify-sources.ts",
+    "bytes": 2656,
+    "sha256": "47d6ed6dd6cfe412da596470838bc49b2d1b3a4524c0910f80c9c932046de5ae"
+  },
+  {
+    "path": "scripts/test-migrations.py",
+    "bytes": 2875,
+    "sha256": "e016899a435dd9cc08be6d0c4c9e711ce8221b8d5b6956eee00b24247999e812"
+  },
+  {
+    "path": "scripts/forecast-auto.ts",
+    "bytes": 2541,
+    "sha256": "a2b003b5f23b4268e4528caee1d750ba94b8dfcfed9f2c97743f820a60637beb"
+  },
+  {
+    "path": "scripts/preflight.mjs",
+    "bytes": 517,
+    "sha256": "c1cea16c9e965aa4ef0ea0e60bab01ae3fc95fc0072e5fa1f25bb846c27c80f4"
+  },
+  {
+    "path": "scripts/verify-remote.ts",
+    "bytes": 2441,
+    "sha256": "2279e2911b106e67997dc047d5ff867e5221ac54ed784f0d51d933fcee21e10d"
+  },
+  {
+    "path": "scripts/configure-db.mjs",
+    "bytes": 468,
+    "sha256": "5ea17f93b1b6fec1f8e1f1deccc0a54ad04a4875c2dc630eec401b667cdfd862"
+  },
+  {
+    "path": "scripts/benchmark.ts",
+    "bytes": 1511,
+    "sha256": "8e268bf0f29ccb4f57cfe848cfe4600b533deaaa1fc7b8776a7cdc7bfdfc627d"
+  },
+  {
+    "path": "scripts/forecast.ts",
+    "bytes": 6468,
+    "sha256": "bf479eb8e3b12f33ef7772c02d39298290b8441be430e05c6c1da15dc8ce7199"
+  },
+  {
+    "path": "scripts/sync.ts",
+    "bytes": 22009,
+    "sha256": "f99d873b6874dbecfb0fe12478cdda6c51f85a30a35cc49a8d8f6073402a6f3d"
+  },
+  {
+    "path": "worker/index.ts",
+    "bytes": 9926,
+    "sha256": "b91159ce1888f3b364b93dcff2ad13b16433b5b6e2d18961a97268f2f389d24a"
+  },
+  {
+    "path": "migrations/0001_initial.sql",
+    "bytes": 3717,
+    "sha256": "1dfcc77b0b1a5563a3959c46d21599c7cc0546ec55265bb5375de62676237479"
+  },
+  {
+    "path": "migrations/0003_directory.sql",
+    "bytes": 401,
+    "sha256": "4bdff091d2036fae60e1ca14777babc0fce34c5b45a04e8cbb778d85e76d189a"
+  },
+  {
+    "path": "migrations/0004_aliases.sql",
+    "bytes": 196,
+    "sha256": "1168c7b8d7de856951f576a47de201e0ac9f5dcb7401daf9234e1f3d562c5415"
+  },
+  {
+    "path": "migrations/0002_forecasts.sql",
+    "bytes": 697,
+    "sha256": "fcdfe168508d2932a24a373e8eaade8561861ee8cfdd7603ad9c27027df03179"
+  },
+  {
+    "path": "tests/forecast.test.ts",
+    "bytes": 7426,
+    "sha256": "69f9a8fae9331ba6e257c30a0ecde1e11d8830f0702110f7095f7bdd81482f3c"
+  },
+  {
+    "path": "tests/core.test.ts",
+    "bytes": 8729,
+    "sha256": "3df7a6e9f341029d3024e4ab3b7ccb7f1dcf7e0e6ce979cb2b8b72849db2c4b5"
+  },
+  {
+    "path": "tests/discovery.test.ts",
+    "bytes": 5275,
+    "sha256": "3599540973751a0b1b0b8ede960948dfa0547b3ab97ce47c48609d9ce09adaef"
+  },
+  {
+    "path": "tests/browser/journey.spec.ts",
+    "bytes": 5849,
+    "sha256": "c16e4d63e0c7c3ede7fa70ea95335dc849696611e2e98fd239765c30a3774016"
+  },
+  {
+    "path": "docs/source-verification.json",
+    "bytes": 3640,
+    "sha256": "bba7cf4fe5ee81d3ed97462fa27293929c5fc325e9bc66952d1df4aaa8216d40"
+  },
+  {
+    "path": "docs/workload-measurements.json",
+    "bytes": 1322,
+    "sha256": "97a2cefaf1d0e1833a6dc347e60edd02528349ff737bd426f7b9d0ca04ebc5f1"
+  },
+  {
+    "path": "docs/coverage.csv",
+    "bytes": 645,
+    "sha256": "ad95f58e210591f8e423f5b3f016393e8bd7b6a3d6f8154571222ef485c56969"
+  },
+  {
+    "path": "docs/ARCHITECTURE.md",
+    "bytes": 5434,
+    "sha256": "dd95fa847bed81dac74d202456d865c37558fcc04caff51765eaac75d28455a7"
+  },
+  {
+    "path": "docs/OPERATIONS.md",
+    "bytes": 6970,
+    "sha256": "a092e39d90b72f029858220e4e8a080f81595f1d9ed85ee3ca66168932302232"
+  },
+  {
+    "path": "docs/IMPLEMENTATION-REPORT.md",
+    "bytes": 8692,
+    "sha256": "5bd19a8db620482cac529825c9f4380f68159de79b71a4e10652a739dd3eb8ea"
+  },
+  {
+    "path": "docs/FORECAST.md",
+    "bytes": 7240,
+    "sha256": "cdb95ea025f82374d49215046503dcece85a28366b69345fc68aa78973b619f9"
+  },
+  {
+    "path": "docs/validation.json",
+    "bytes": 1750,
+    "sha256": "413f40ee341a4842b01a7377433821c7002cde12a5ac0e3caebc71eb98b2d1b6"
+  },
+  {
+    "path": ".github/workflows/sync.yml",
+    "bytes": 792,
+    "sha256": "2dde482e8408460d541b1c7657ba5e4b641c8ef6f4be829d194f0b10949e9acb"
+  },
+  {
+    "path": "forecast/config.json",
+    "bytes": 196,
+    "sha256": "5c9d564fbb21b93b311533870e9ac8315c23184d9d65130b50a0962f41168f84"
+  },
+  {
+    "path": "forecast/published-picks.json",
+    "bytes": 70,
+    "sha256": "fc43a8bd61f53ff417a29badcf17008019f5040572ef0d1b004a620427c4efb5"
+  },
+  {
+    "path": "forecast/mappings.json",
+    "bytes": 3,
+    "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+  },
+  {
+    "path": "forecast/inputs.json",
+    "bytes": 3,
+    "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+  },
+  {
+    "path": "forecast/rosters.json",
+    "bytes": 3,
+    "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+  },
+  {
+    "path": "forecast/manual-mappings.json",
+    "bytes": 3,
+    "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+  }
+]

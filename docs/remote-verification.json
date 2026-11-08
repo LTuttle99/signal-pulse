@@ -1,0 +1,5 @@
+{
+  "status": "NOT_RUN",
+  "reason": "No public deployment performed; D1 binding retains its placeholder UUID and no deployed URL was supplied.",
+  "dryRun": "passed: Worker bundle and asset manifest generated locally; no remote deployment or authentication performed"
+}

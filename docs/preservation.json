@@ -1,0 +1,18 @@
+{
+  "archive": "election-atlas-preserved-2026-11-05.tar.gz",
+  "bytes": 1119110,
+  "sha256": "f366972404bda2a4f5ffab56d4171694790e5cf23f9df2faff793c40cfc44828",
+  "verifiedMembers": [
+    "election-atlas/src/main.tsx",
+    "election-atlas/public/data/latest.json",
+    "election-atlas/scripts/sync.ts"
+  ],
+  "noGitRepositoryPresent": true,
+  "excluded": [
+    "node_modules",
+    "work",
+    ".wrangler",
+    "secrets",
+    "test-results"
+  ]
+}

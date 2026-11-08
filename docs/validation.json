@@ -1,0 +1,46 @@
+{
+  "checkedAt": "2026-11-08T15:04:10.090803+00:00",
+  "typecheck": "passed",
+  "unitTests": {
+    "passed": 34
+  },
+  "migrations": {
+    "passed": 6,
+    "legacyTablesPreserved": true,
+    "marketInsertAndUpdateGuards": "passed",
+    "indexedCacheRangeQueryPlan": "passed"
+  },
+  "browser": {
+    "uniqueJourneysPassed": 16,
+    "projects": [
+      "desktop 1440x1000",
+      "mobile iPhone 13"
+    ],
+    "note": "All 16 desktop/mobile journeys passed in a complete November 8 run.",
+    "axe": [
+      "dashboard",
+      "watchlist",
+      "economy"
+    ],
+    "thirdPartyEmbeds": "excluded from axe; visually inspected separately",
+    "manualChecks": [
+      "Global search to company route",
+      "Royal blue desktop preview",
+      "Mobile navigation"
+    ]
+  },
+  "build": "passed",
+  "cloudflareDryRun": "passed, not published",
+  "remoteDeployment": "not performed",
+  "snapshot": {
+    "articles": 227,
+    "stories": 226,
+    "companies": 12,
+    "economicSeriesWithObservations": 3,
+    "economicObservations": 99,
+    "confirmedReleaseDates": 20
+  },
+  "theme": "royal blue, including economic charts; red/green market movement and semantic warning colors retained",
+  "productionCPUCompliance": "not established by local HTTP timings",
+  "fredRelay": "owner authentication, upstream whitelist, secret injection, and error redaction passed; no real FRED credentials tested"
+}

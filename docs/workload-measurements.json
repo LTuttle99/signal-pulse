@@ -1,0 +1,41 @@
+{
+  "checkedAt": "2026-11-08T15:03:31.016Z",
+  "environment": "http://127.0.0.1:8787",
+  "workload": "80 sequential real Worker/D1 API requests; precomputed JSON chunks; no runtime normalization",
+  "samples": [
+    {
+      "path": "/api/pulse/dashboard",
+      "requests": 20,
+      "payloadBytes": 85443,
+      "medianWallMs": 5.745874999999955,
+      "p95WallMs": 7.95391699999999,
+      "observedCacheHits": 20
+    },
+    {
+      "path": "/api/pulse/news",
+      "requests": 20,
+      "payloadBytes": 195062,
+      "medianWallMs": 6.238916999999901,
+      "p95WallMs": 7.294709000000012,
+      "observedCacheHits": 20
+    },
+    {
+      "path": "/api/pulse/economy",
+      "requests": 20,
+      "payloadBytes": 19245,
+      "medianWallMs": 3.60125000000005,
+      "p95WallMs": 4.987041999999974,
+      "observedCacheHits": 19
+    },
+    {
+      "path": "/api/pulse/diagnostics",
+      "requests": 20,
+      "payloadBytes": 7336,
+      "medianWallMs": 3.9362089999999625,
+      "p95WallMs": 5.735832999999957,
+      "observedCacheHits": 19
+    }
+  ],
+  "cpuCompliance": "NOT ESTABLISHED: local HTTP wall times include I/O and are not production Worker CPU measurements.",
+  "freeTier": "No paid API or service invoked. Production account request and D1 quotas still require account analytics."
+}
