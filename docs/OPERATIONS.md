@@ -45,6 +45,7 @@ Publish the source to a public GitHub repository to use the no-charge public-run
 | `CLOUDFLARE_API_TOKEN` | Repository secret | Least-privilege D1 editing for this account/database |
 | `CLOUDFLARE_ACCOUNT_ID` | Repository secret | Cloudflare account |
 | `D1_DATABASE_ID` | Repository variable | Existing or newly created D1 UUID |
+| `ENABLE_CLOUDFLARE_SYNC` | Repository variable | Set `true` for the Cloudflare collector; otherwise the Pages workflow is the default |
 | `FRED_PROXY_URL` | Optional repository variable | Deployed Signal Pulse base URL for the authenticated FRED relay |
 | `FRED_PROXY_TOKEN` | Optional repository secret | Matches the owner-only Cloudflare `INGEST_TOKEN` secret |
 | `FRED_API_KEY` | Optional local/direct collector secret | Direct collector mode only; the preferred deployed mode keeps this key in Cloudflare Secrets |

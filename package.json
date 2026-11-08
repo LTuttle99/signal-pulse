@@ -18,7 +18,10 @@
     "check": "npm run typecheck && npm test",
     "verify:remote": "node --import tsx scripts/verify-remote.ts",
     "benchmark": "node --import tsx scripts/benchmark.ts",
-    "collect:local": "node scripts/collect-local.mjs"
+    "collect:local": "node scripts/collect-local.mjs",
+    "build:pages": "tsc -b && vite build --mode pages --outDir dist-pages",
+    "preview:pages": "vite preview --mode pages --outDir dist-pages --host 127.0.0.1",
+    "test:pages": "playwright test --config playwright.pages.config.ts"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.90.0",

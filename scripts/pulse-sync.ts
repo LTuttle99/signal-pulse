@@ -725,9 +725,11 @@ const previousWrites =
 // Includes indexed-write and cache/checkpoint allowance, a conservative estimate (not billing analytics).
 bundle.usage = {
   day: at.slice(0, 10),
-  estimatedRowsWritten: previousWrites + commands.length * 3 + 200,
+  estimatedRowsWritten: db ? previousWrites + commands.length * 3 + 200 : 0,
   lastStatements: commands.length,
-  note: "Conservative estimated indexed row writes, not account analytics. Collector stops at 80,000/day. Check Cloudflare for actual usage.",
+  note: db
+    ? "Conservative estimated indexed row writes, not account analytics. Collector stops at 80,000/day. Check Cloudflare for actual usage."
+    : "Static snapshot mode: no D1 writes. Collection and publishing run in GitHub Actions.",
 };
 if (bundle.usage.estimatedRowsWritten > 80000 && db && !local)
   throw Error(

@@ -58,3 +58,7 @@ See [the implementation report](docs/IMPLEMENTATION-REPORT.md), [operations and 
 ## Recovery checkpoint
 
 `../election-atlas-preserved-2026-11-05.tar.gz` contains the Election Atlas source, original tests, documentation, configuration, result/poll/forecast snapshots, and compiled application as they existed before this pivot. No Git repository was present, so the complete archive is the preservation snapshot. To restore, extract it to a separate directory, run `npm ci`, and point it at a separately reviewed database binding. Do not overwrite the live Signal Pulse installation.
+
+## GitHub Pages deployment
+
+For `https://ltuttle99.github.io/signal-pulse/`, use the included `.github/workflows/pages.yml` and set **Settings → Pages → Source → GitHub Actions**. It deploys compiled `dist-pages` assets, uses project-prefix URLs and hash routes, and refreshes the collected snapshot automatically without D1 credentials. See [GitHub Pages instructions](docs/GITHUB-PAGES.md). Uploading the raw source `index.html` alone cannot run the app.

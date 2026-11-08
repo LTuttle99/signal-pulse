@@ -1,3 +1,4 @@
+import { deliveryTarget } from "../shared/delivery";
 import React, {
   useState,
   useEffect,
@@ -10,6 +11,7 @@ import React, {
 import { createRoot, type Root } from "react-dom/client";
 import {
   BrowserRouter,
+  HashRouter,
   NavLink,
   Link,
   Routes,
@@ -90,9 +92,20 @@ const PreferencesContext = createContext<{
 function usePrefs() {
   return useContext(PreferencesContext);
 }
+const hosting = deliveryTarget(
+  import.meta.env.BASE_URL,
+  import.meta.env.MODE === "pages",
+);
+const HostingRouter = hosting.router === "hash" ? HashRouter : BrowserRouter;
+async function loadSnapshot(): Promise<PulseBundle> {
+  const r = await fetch(hosting.snapshot);
+  if (!r.ok) throw Error("No collected snapshot available");
+  return r.json();
+}
 async function loadBundle(): Promise<PulseBundle> {
+  if (!hosting.api) return loadSnapshot();
   try {
-    const r = await fetch("/api/pulse/dashboard", {
+    const r = await fetch(hosting.api + "dashboard", {
       signal: AbortSignal.timeout(4500),
     });
     if (!r.ok) throw Error("API unavailable");
@@ -101,9 +114,7 @@ async function loadBundle(): Promise<PulseBundle> {
       throw Error("Invalid data");
     return data;
   } catch {
-    const r = await fetch("/pulse/latest.json");
-    if (!r.ok) throw Error("No collected snapshot available");
-    return r.json();
+    return loadSnapshot();
   }
 }
 function usePulse() {
@@ -114,16 +125,15 @@ function useNews() {
   const q = useQuery({
     queryKey: ["pulse-news"],
     queryFn: async () => {
+      if (!hosting.api) return loadSnapshot();
       try {
-        const r = await fetch("/api/pulse/news", {
+        const r = await fetch(hosting.api + "news", {
           signal: AbortSignal.timeout(4500),
         });
         if (!r.ok) throw Error();
         return (await r.json()) as Pick<PulseBundle, "articles" | "stories">;
       } catch {
-        const r = await fetch("/pulse/latest.json");
-        if (!r.ok) throw Error("News unavailable");
-        return (await r.json()) as PulseBundle;
+        return loadSnapshot();
       }
     },
   });
@@ -2471,9 +2481,9 @@ if (import.meta.hot) import.meta.hot.data.root = root;
 root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
+      <HostingRouter>
         <App />
-      </BrowserRouter>
+      </HostingRouter>
     </QueryClientProvider>
   </React.StrictMode>,
 );

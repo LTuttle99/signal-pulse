@@ -1,0 +1,61 @@
+name: Build and refresh Signal Pulse on GitHub Pages
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: "7,37 * * * *"
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: signal-pulse-pages
+  cancel-in-progress: false
+jobs:
+  deploy:
+    if: github.event.repository.private == false && vars.ENABLE_CLOUDFLARE_SYNC != 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    env:
+      FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+      FRED_PROXY_URL: ${{ vars.FRED_PROXY_URL }}
+      FRED_PROXY_TOKEN: ${{ secrets.FRED_PROXY_TOKEN }}
+      SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Restore collector state and source cooldowns
+        uses: actions/cache/restore@v5
+        with:
+          path: public/pulse/latest.json
+          key: pulse-pages-v1-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: pulse-pages-v1-
+      - name: Collect verified public metadata
+        id: collection
+        continue-on-error: true
+        run: npm run sync
+      - name: Save successful collector state
+        if: steps.collection.outcome == 'success'
+        uses: actions/cache/save@v5
+        with:
+          path: public/pulse/latest.json
+          key: pulse-pages-v1-${{ github.run_id }}-${{ github.run_attempt }}
+      - name: Build the project-prefix static app
+        run: npm run build:pages
+        env:
+          PAGES_BASE: /${{ github.event.repository.name }}/
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: dist-pages
+      - name: Deploy compiled assets
+        id: deployment
+        uses: actions/deploy-pages@v5

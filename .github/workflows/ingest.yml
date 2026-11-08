@@ -1,0 +1,39 @@
+name: Synchronize Signal Pulse
+on:
+  schedule:
+    - cron: '7,37 * * * *'
+  workflow_dispatch:
+concurrency:
+  group: signal-pulse-ingestion
+  cancel-in-progress: false
+permissions:
+  contents: read
+jobs:
+  ingest:
+    if: github.event.repository.private == false && vars.ENABLE_CLOUDFLARE_SYNC == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      D1_DATABASE_ID: ${{ vars.D1_DATABASE_ID }}
+      FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+      FRED_PROXY_URL: ${{ vars.FRED_PROXY_URL }}
+      FRED_PROXY_TOKEN: ${{ secrets.FRED_PROXY_TOKEN }}
+      SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: node scripts/configure-db.mjs
+      - run: npm run sync -- --db
+      - name: Preserve collection diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: signal-pulse-diagnostics
+          path: work/pulse/last-run.json
+          retention-days: 7
