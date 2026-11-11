@@ -1,3 +1,4 @@
+import {additionalCompanies} from "./stock-catalog";
 import { XMLParser, XMLValidator } from "fast-xml-parser";
 import { z } from "zod";
 export const categories = [
@@ -12,6 +13,7 @@ export const categories = [
 ] as const;
 export type Category = (typeof categories)[number];
 export interface Company {
+  kind?:"stock"|"etf";
   symbol: string;
   name: string;
   exchange: string;
@@ -148,7 +150,7 @@ export interface PulseBundle {
     note: string;
   };
 }
-export const companySeeds: Company[] = [
+const coreCompanies: Company[] = [
   [
     "AAPL",
     "Apple",
@@ -269,6 +271,8 @@ export const companySeeds: Company[] = [
     ? `https://www.sec.gov/edgar/browse/?CIK=${cik}&owner=exclude`
     : "https://www.tradingview.com/markets/etfs/",
 }));
+export const companySeeds:Company[]=[...coreCompanies.map(c=>({...c,kind:c.cik?'stock' as const:'etf' as const})),...additionalCompanies.filter(c=>!coreCompanies.some(core=>core.symbol===c.symbol))];
+export function mergeCompanyCatalog(saved:Company[]):Company[]{const previous=new Map(saved.map(c=>[c.symbol,c]));return companySeeds.map(seed=>{const old=previous.get(seed.symbol);return {...old,...seed,...(old?.verifiedAt?{verifiedAt:old.verifiedAt,name:old.name}:{}),...(old?.filings?{filings:old.filings}:{}),...(old?.facts?{facts:old.facts}:{})}})}
 export const seriesSeeds: EconomicSeries[] = [
   [
     "CPIAUCSL",

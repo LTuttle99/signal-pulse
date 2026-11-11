@@ -3,6 +3,7 @@ import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import {
   emptyBundle,
+  mergeCompanyCatalog,
   feedDefinitions,
   normalizeFeed,
   deduplicate,
@@ -71,6 +72,7 @@ if (db) {
 const previous =
     db && !databaseRecovered ? emptyBundle() : structuredClone(bundle),
   states = new Map(bundle.providers.map((p) => [p.id, p]));
+bundle.companies=mergeCompanyCatalog(bundle.companies);
 function state(
   id: string,
   name: string,
@@ -570,7 +572,7 @@ for (const c of bundle.companies) {
   upsert(
     "stock_symbols",
     ["symbol", "company_symbol", "exchange", "kind"],
-    [c.symbol, c.symbol, c.exchange, c.cik ? "stock" : "etf"],
+    [c.symbol, c.symbol, c.exchange, c.kind ?? (c.cik ? "stock" : "etf")],
     "symbol",
     "exchange=excluded.exchange WHERE exchange<>excluded.exchange",
   );

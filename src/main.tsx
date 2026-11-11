@@ -1,3 +1,4 @@
+import {mergeCompanyCatalog,companySeeds} from "../shared/pulse";
 import { deliveryTarget } from "../shared/delivery";
 import React, {
   useState,
@@ -100,7 +101,8 @@ const HostingRouter = hosting.router === "hash" ? HashRouter : BrowserRouter;
 async function loadSnapshot(): Promise<PulseBundle> {
   const r = await fetch(hosting.snapshot);
   if (!r.ok) throw Error("No collected snapshot available");
-  return r.json();
+  const data=(await r.json()) as PulseBundle;
+  return {...data,companies:mergeCompanyCatalog(data.companies??[])};
 }
 async function loadBundle(): Promise<PulseBundle> {
   if (!hosting.api) return loadSnapshot();
@@ -112,7 +114,7 @@ async function loadBundle(): Promise<PulseBundle> {
     const data = (await r.json()) as PulseBundle;
     if (data.version !== 1 || !Array.isArray(data.articles))
       throw Error("Invalid data");
-    return data;
+    return {...data,companies:mergeCompanyCatalog(data.companies??[])};
   } catch {
     return loadSnapshot();
   }
@@ -207,6 +209,8 @@ function SaveButton({
       className={small ? "icon-button save" : "button secondary"}
       aria-label={`${exists ? "Remove" : "Watch"} ${label}`}
       aria-pressed={exists}
+      disabled={!exists&&prefs.watchlist.length>=100}
+      title={!exists&&prefs.watchlist.length>=100?"Watchlist limit: 100 signals":undefined}
       onClick={() =>
         setPrefs((p) => ({
           ...p,
@@ -789,16 +793,7 @@ function Markets() {
               value={symbol}
               onChange={(e) => setSymbol(e.target.value)}
             >
-              {[
-                "NASDAQ:NVDA",
-                "NASDAQ:AAPL",
-                "NASDAQ:MSFT",
-                "NASDAQ:TSLA",
-                "AMEX:SPY",
-                "NASDAQ:QQQ",
-              ].map((s) => (
-                <option key={s}>{s}</option>
-              ))}
+              {companySeeds.map(c=><option key={c.symbol} value={c.exchange+":"+c.symbol}>{c.symbol} · {c.name}</option>)}
             </select>
           }
         >
@@ -1062,6 +1057,7 @@ function Companies({ bundle }: { bundle: PulseBundle }) {
   bundle = fullNews ?? bundle;
   const [params, setParams] = useSearchParams();
   const q = params.get("q") ?? "";
+  const [limit,setLimit]=useState(40);
   const companies = bundle.companies.filter((c) =>
     (c.symbol + " " + c.name + " " + c.sector)
       .toLowerCase()
@@ -1087,7 +1083,7 @@ function Companies({ bundle }: { bundle: PulseBundle }) {
         <span className="kbd">{bundle.companies.length} symbols</span>
       </label>
       <div className="company-directory">
-        {companies.map((c) => (
+        {companies.slice(0,limit).map((c) => (
           <div className="directory-row" key={c.symbol}>
             <div className="company-logo">{c.symbol[0]}</div>
             <Link to={"/companies/" + c.symbol}>
@@ -1114,6 +1110,7 @@ function Companies({ bundle }: { bundle: PulseBundle }) {
           </div>
         ))}
       </div>
+      {companies.length>limit&&<button className="button secondary load-more" onClick={()=>setLimit(n=>n+40)}>Show more companies ({companies.length-limit} remaining)</button>}
       {!companies.length && (
         <Empty title="No supported company matches">
           This directory is a curated universe, not every listed U.S. security.
@@ -1159,7 +1156,7 @@ function CompanyPage({
         <NavLink to={"/stocks/" + c.symbol}>Stock analysis</NavLink>
         <NavLink to={"/companies/" + c.symbol}>Company intelligence</NavLink>
         <a href={c.sourceUrl} target="_blank" rel="noreferrer">
-          {c.cik ? "SEC company record" : "ETF market source"}{" "}
+          {c.cik ? "SEC company record" : "Market source"}{" "}
           <ExternalLink size={12} />
         </a>
       </div>
@@ -1226,7 +1223,7 @@ function CompanyPage({
             <div className="score-row">
               <span>SEC CIK</span>
               <strong>
-                {c.cik?.padStart(10, "0") ?? "ETF: no mapped CIK"}
+                {c.cik?.padStart(10, "0") ?? "Not mapped"}
               </strong>
             </div>
             <p className="fine-print">
@@ -1260,7 +1257,7 @@ function CompanyPage({
               <p className="muted">
                 {c.cik
                   ? "SEC financial facts will appear after the owner configures an identifying collector contact."
-                  : "SEC financial facts are not mapped for this ETF."}
+                  : "SEC financial facts are not mapped for this security."}
               </p>
             )}
           </Panel>
@@ -1289,7 +1286,7 @@ function CompanyPage({
                     View official SEC submissions ↗
                   </a>
                 ) : (
-                  "No mapped SEC filings for this ETF."
+                  "No mapped SEC filings for this security."
                 )}
               </Empty>
             )}
